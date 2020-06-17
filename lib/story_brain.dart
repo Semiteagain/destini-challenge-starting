@@ -2,9 +2,12 @@ import 'story.dart';
 //TODO: Step 6 - import the story.dart file into this file.
 
 class StoryBrain {
+
+  int _storyNumber = 0;
+
 List<Story> _storyData = [
 
-      int storyNumber = 0;
+      
  Story(
      storyTitle:
      'Your car has blown a tire on a winding road in the middle of nowhere with no cell phone reception. You decide to hitchhike. A rusty pickup truck rumbles to a stop next to you. A man with a wide brimmed hat with soulless eyes opens the passenger door for you and asks: "Need a ride, boy?".',
@@ -36,10 +39,23 @@ List<Story> _storyData = [
      choice2: '')
 ];
 
-   void nextStory() {
+   void nextStory(int choiceNumber) {
       
-  
-
+    if (choiceNumber == 1 && _storyNumber == 0) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 0) {
+      _storyNumber = 1;
+    } else if (choiceNumber == 1 && _storyNumber == 1) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 1) {
+      _storyNumber = 3;
+    } else if (choiceNumber == 1 && _storyNumber == 2) {
+      _storyNumber = 5;
+    } else if (choiceNumber == 2 && _storyNumber == 2) {
+      _storyNumber = 4;
+    } else if (_storyNumber ==3 || _storyNumber == 4 || _storyNumber == 5) {
+      return reset();
+    }
 
 
 
@@ -47,18 +63,41 @@ List<Story> _storyData = [
 
     
      String getStory()  {
-      return _storyData[0].storyTitle;
+      return _storyData[_storyNumber].storyTitle;
     }
 
     String getChoice1() {
-      return _storyData[0].choice1;
+      return _storyData[_storyNumber].choice1;
     }
 
 
     String getChoice2() {
-      return _storyData[0].choice2;
+      return _storyData[_storyNumber].choice2;
     }
 
+    
+
+    void reset() {
+      _storyNumber = 0;
+    }
+     
+
+     bool buttonShouldBeVisible() {
+        
+        if (_storyNumber == 0 || _storyNumber == 1 || _storyNumber == 3) {
+          return true;
+        } else {
+          return false;
+        }
+     }
+        
+
+        
+
+
+
+
+  
 }
 //TODO: Step 5 - Create a new class called StoryBrain.
 
